@@ -14,9 +14,13 @@ import { toFieldValidator } from '@vee-validate/zod';
 
 const { value: usernameValue, errorMessage: usernameError } = useField(
   'username',
-  toFieldValidator(z.string().nonempty({ message: 'Le champ est obligatoire' }))
-    .min(3, { message: 'Le champ est trop court' })
-    .max(103, { message: 'Le champ est trop long' })
+  toFieldValidator(
+    z
+      .string()
+      .nonempty({ message: 'Le champ est obligatoire' })
+      .min(3, { message: 'Le champ est trop court' })
+      .max(10, { message: 'Le champ est trop long' })
+  )
 );
 </script>
 
