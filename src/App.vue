@@ -10,18 +10,20 @@
 <script setup lang="ts">
 import { useForm, useField } from 'vee-validate';
 import { z } from 'zod';
-import { toFieldValidator } from '@vee-validate/zod';
+import { toFormValidator } from '@vee-validate/zod';
 
-const { value: usernameValue, errorMessage: usernameError } = useField(
-  'username',
-  toFieldValidator(
-    z
-      .string()
-      .nonempty({ message: 'Le champ est obligatoire' })
-      .min(3, { message: 'Le champ est trop court' })
-      .max(10, { message: 'Le champ est trop long' })
-  )
-);
+const validationSchema = z.object({
+  username: z
+    .string()
+    .nonempty({ message: 'Le champ est obligatoire' })
+    .min(3, { message: 'Le champ est trop court' })
+    .max(10, { message: 'Le champ est trop long' }),
+});
+
+useForm({ validationSchema: toFormValidator(validationSchema) });
+
+const { value: usernameValue, errorMessage: usernameError } =
+  useField('username');
 </script>
 
 <style scoped lang="scss"></style>
