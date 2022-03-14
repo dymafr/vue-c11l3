@@ -15,8 +15,8 @@ import { toFormValidator } from '@vee-validate/zod';
 const validationSchema = z.object({
   username: z
     .string()
-    .nonempty({ message: 'Le champ est obligatoire' })
     .min(3, { message: 'Le champ est trop court' })
+    .nonempty({ message: 'Le champ est obligatoire' })
     .max(10, { message: 'Le champ est trop long' }),
 });
 
